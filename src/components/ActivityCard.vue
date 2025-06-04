@@ -18,7 +18,7 @@ const goToActivityDetail = () => {
 </script>
 
 <template>
-  <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+  <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300">
     <div class="relative cursor-pointer" @click="goToActivityDetail">
       <img
         :src="activity.organizer.photo"
