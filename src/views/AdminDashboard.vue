@@ -84,7 +84,7 @@ const handleDelete = () => {
     </div>
 
     <!-- Liste des activités -->
-    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <div class="bg-white shadow-md rounded-lg overflow-x-scroll">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
           <tr>
@@ -92,7 +92,7 @@ const handleDelete = () => {
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lieu</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Places</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actionssss</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
@@ -116,7 +116,7 @@ const handleDelete = () => {
                 @click="openModal(activity)"
                 class="text-blue-600 hover:text-blue-900 mr-4"
               >
-                Modifier
+                Modifiers
               </button>
               <button
                 @click="openDeleteModal(activity)"
