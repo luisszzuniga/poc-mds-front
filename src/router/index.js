@@ -43,6 +43,9 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
+  
+  // Scroll to top on route change
+  window.scrollTo(0, 0)
 })
 
 export default router 
