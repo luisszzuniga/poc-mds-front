@@ -18,9 +18,8 @@ const goToActivityDetail = () => {
 </script>
 
 <template>
-  <router-link :to="`/activity/${activity.id}`" class="hover:shadow-lg transition-shadow duration-300"> 
   <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-    <div class="relative">
+    <div class="relative cursor-pointer" @click="goToActivityDetail">
       <img
         :src="activity.organizer.photo"
         :alt="activity.organizer.name"
@@ -35,7 +34,7 @@ const goToActivityDetail = () => {
       </div>
     </div>
     <div class="p-6">
-      <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ activity.name }}</h3>
+      <h3 class="text-xl font-semibold text-gray-800 mb-2 cursor-pointer" @click="goToActivityDetail">{{ activity.name }}</h3>
       <p class="text-gray-600 mb-4">{{ activity.description }}</p>
       <div class="flex items-center justify-between mb-4">
         <div class="flex items-center text-gray-500">
@@ -66,5 +65,4 @@ const goToActivityDetail = () => {
       </div>
     </div>
   </div>
-  </router-link>
 </template> 
