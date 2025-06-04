@@ -1,6 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../stores/users'
+import ResetStores from '../components/ResetStores.vue'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -40,7 +41,8 @@ const logout = () => {
           Utilisateurs
         </router-link>
       </nav>
-      <div class="p-4">
+      <div class="p-4 space-y-4">
+        <ResetStores />
         <button
           @click="logout"
           class="flex items-center w-full px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md"
