@@ -60,7 +60,7 @@ export const useActivityStore = defineStore('activities', {
           location: 'Centre Culturel de Mauron',
           organizer: {
             name: 'Marie Dupont',
-            photo: 'https://i.pravatar.cc/150?img=1'
+            photo: 'https://i.pravatar.cc/150?img=4'
           },
           date: '2024-04-15',
           time: '14:00',
@@ -75,7 +75,7 @@ export const useActivityStore = defineStore('activities', {
           location: 'Salle des Fêtes',
           organizer: {
             name: 'Jean Martin',
-            photo: 'https://i.pravatar.cc/150?img=2'
+            photo: 'https://i.pravatar.cc/150?img=5'
           },
           date: '2024-04-20',
           time: '15:30',
@@ -90,7 +90,7 @@ export const useActivityStore = defineStore('activities', {
           location: 'Parc Municipal',
           organizer: {
             name: 'Sophie Bernard',
-            photo: 'https://i.pravatar.cc/150?img=3'
+            photo: 'https://i.pravatar.cc/150?img=6'
           },
           date: '2024-04-25',
           time: '10:00',
@@ -105,7 +105,7 @@ export const useActivityStore = defineStore('activities', {
           location: 'Centre Culturel de Mauron',
           organizer: {
             name: 'Marie Dupont',
-            photo: 'https://i.pravatar.cc/150?img=1'
+            photo: 'https://i.pravatar.cc/150?img=7'
           },
           date: '2024-04-15',
           time: '14:00',
@@ -120,7 +120,7 @@ export const useActivityStore = defineStore('activities', {
           location: 'Salle des Fêtes',
           organizer: {
             name: 'Jean Martin',
-            photo: 'https://i.pravatar.cc/150?img=2'
+            photo: 'https://i.pravatar.cc/150?img=8'
           },
           date: '2024-04-20',
           time: '15:30',
@@ -135,7 +135,7 @@ export const useActivityStore = defineStore('activities', {
           location: 'Parc Municipal',
           organizer: {
             name: 'Sophie Bernard',
-            photo: 'https://i.pravatar.cc/150?img=3'
+            photo: 'https://i.pravatar.cc/150?img=9'
           },
           date: '2024-04-25',
           time: '10:00',
@@ -150,7 +150,7 @@ export const useActivityStore = defineStore('activities', {
           location: 'Centre Culturel de Mauron',
           organizer: {
             name: 'Marie Dupont',
-            photo: 'https://i.pravatar.cc/150?img=1'
+            photo: 'https://i.pravatar.cc/150?img=10'
           },
           date: '2024-04-15',
           time: '14:00',
@@ -165,7 +165,7 @@ export const useActivityStore = defineStore('activities', {
           location: 'Salle des Fêtes',
           organizer: {
             name: 'Jean Martin',
-            photo: 'https://i.pravatar.cc/150?img=2'
+            photo: 'https://i.pravatar.cc/150?img=11'
           },
           date: '2024-04-20',
           time: '15:30',
@@ -180,7 +180,7 @@ export const useActivityStore = defineStore('activities', {
           location: 'Parc Municipal',
           organizer: {
             name: 'Sophie Bernard',
-            photo: 'https://i.pravatar.cc/150?img=3'
+            photo: 'https://i.pravatar.cc/150?img=12'
           },
           date: '2024-04-25',
           time: '10:00',
