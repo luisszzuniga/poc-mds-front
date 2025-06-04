@@ -67,6 +67,34 @@ export const useUserStore = defineStore('users', {
       return true
     },
 
+    // Nouvelles actions CRUD
+    fetchUsers() {
+      // Les utilisateurs sont déjà dans le state
+      return this.users
+    },
+
+    addUser(user) {
+      const newUser = {
+        id: this.users.length + 1,
+        ...user
+      }
+      this.users.push(newUser)
+      this.saveState()
+    },
+
+    updateUser(id, updatedUser) {
+      const index = this.users.findIndex(user => user.id === id)
+      if (index !== -1) {
+        this.users[index] = { ...this.users[index], ...updatedUser }
+        this.saveState()
+      }
+    },
+
+    deleteUser(id) {
+      this.users = this.users.filter(user => user.id !== id)
+      this.saveState()
+    },
+
     saveState() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
         users: this.users,

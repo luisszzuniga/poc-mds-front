@@ -2,7 +2,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useActivityStore } from '../stores/activities'
 import ConfirmationModal from '../components/ConfirmationModal.vue'
-
+import AdminLayout from '../layouts/AdminLayout.vue'
 const activityStore = useActivityStore()
 const isModalOpen = ref(false)
 const isDeleteModalOpen = ref(false)
@@ -71,7 +71,8 @@ const handleDelete = () => {
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-8">
+  <AdminLayout>
+  <div class="container mx-auto">
     <div class="flex justify-between items-center mb-8">
       <h1 class="text-3xl font-bold text-gray-900">Gestion des Activités</h1>
       <button
@@ -261,4 +262,5 @@ const handleDelete = () => {
       @confirm="handleDelete"
     />
   </div>
+</AdminLayout>
 </template> 
