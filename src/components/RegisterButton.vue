@@ -5,6 +5,7 @@ import { useRegistrationStore } from '../stores/registrations'
 import { usePlacesStore } from '../stores/places'
 import { useUserStore } from '../stores/users'
 import RegistrationModal from './RegistrationModal.vue'
+import ConfirmationModal from './ConfirmationModal.vue'
 import Toast from './Toast.vue'
 
 const props = defineProps({
@@ -23,7 +24,8 @@ const registrationStore = useRegistrationStore()
 const placesStore = usePlacesStore()
 const userStore = useUserStore()
 
-const isModalOpen = ref(false)
+const isRegistrationModalOpen = ref(false)
+const isUnregisterModalOpen = ref(false)
 const isLoading = ref(false)
 const showToast = ref(false)
 const toastMessage = ref('')
@@ -39,7 +41,6 @@ onMounted(() => {
 
 const handleClick = async () => {
   if (!userStore.isAuthenticated) {
-    // Sauvegarder la route actuelle
     router.push({
       name: 'login',
       query: { redirect: router.currentRoute.value.fullPath }
@@ -48,9 +49,9 @@ const handleClick = async () => {
   }
 
   if (isRegistered.value) {
-    await handleUnregister()
+    isUnregisterModalOpen.value = true
   } else {
-    isModalOpen.value = true
+    isRegistrationModalOpen.value = true
   }
 }
 
@@ -74,7 +75,7 @@ const handleRegister = async (count) => {
     }
     await registrationStore.register(props.activityId, count)
     placesStore.updateAvailablePlaces(props.activityId, count)
-    isModalOpen.value = false
+    isRegistrationModalOpen.value = false
     showSuccessToast(`Inscription réussie pour ${count} enfant${count > 1 ? 's' : ''}`)
   } catch (error) {
     console.error('Erreur lors de l\'inscription:', error)
@@ -90,6 +91,7 @@ const handleUnregister = async () => {
     const count = childrenCount.value
     await registrationStore.unregister(props.activityId)
     placesStore.restoreAvailablePlaces(props.activityId, count)
+    isUnregisterModalOpen.value = false
     showSuccessToast('Désinscription réussie')
   } catch (error) {
     console.error('Erreur lors de la désinscription:', error)
@@ -132,10 +134,19 @@ const handleUnregister = async () => {
     </button>
 
     <RegistrationModal
-      :is-open="isModalOpen"
+      :is-open="isRegistrationModalOpen"
       :max-places="maxPlaces"
-      @close="isModalOpen = false"
+      @close="isRegistrationModalOpen = false"
       @confirm="handleRegister"
+    />
+
+    <ConfirmationModal
+      :is-open="isUnregisterModalOpen"
+      title="Confirmer la désinscription"
+      :message="`Êtes-vous sûr de vouloir vous désinscrire de cette activité ? ${childrenCount ? `Vous êtes actuellement inscrit pour ${childrenCount} enfant${childrenCount > 1 ? 's' : ''}.` : ''}`"
+      confirm-text="Se désinscrire"
+      @close="isUnregisterModalOpen = false"
+      @confirm="handleUnregister"
     />
 
     <Toast
