@@ -31,6 +31,12 @@ const router = createRouter({
       path: '/activity/:id',
       name: 'activity-detail',
       component: () => import('../views/ActivityDetailView.vue')
+    },
+    {
+      path: '/admin',
+      name: 'admin-dashboard',
+      component: () => import('../views/AdminDashboard.vue'),
+      meta: { requiresAdmin: true }
     }
   ]
 })
@@ -39,7 +45,11 @@ router.beforeEach((to, from, next) => {
   const userStore = useUserStore()
   
   if (to.meta.requiresGuest && userStore.isAuthenticated) {
-    next({ name: 'home' })
+    next({ name: userStore.currentUser && userStore.currentUser.role === 'admin' ? 'admin-dashboard' : 'home' })
+  } else if (to.meta.requiresAdmin && (!userStore.isAuthenticated || userStore.currentUser.role !== 'admin')) {
+    next({ name: 'login' })
+  } else if (to.name === 'login' && userStore.isAuthenticated && userStore.currentUser.role === 'admin') {
+    next({ name: 'admin-dashboard' })
   } else {
     next()
   }

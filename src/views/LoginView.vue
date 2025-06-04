@@ -3,16 +3,22 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../stores/users'
 
-const router = useRouter()
-const userStore = useUserStore()
-
 const email = ref('')
 const password = ref('')
 const error = ref('')
+const router = useRouter()
+const userStore = useUserStore()
 
-const handleLogin = () => {
-  if (userStore.login(email.value, password.value)) {
-    router.push('/')
+const handleLogin = async () => {
+  error.value = ''
+  const success = userStore.login(email.value, password.value)
+  if (success) {
+    if (userStore.currentUser.role === 'admin') {
+      router.push({ name: 'admin-dashboard' })
+    } else {
+      const redirect = router.currentRoute.value.query.redirect || '/'
+      router.push(redirect)
+    }
   } else {
     error.value = 'Email ou mot de passe incorrect'
   }

@@ -10,10 +10,18 @@ export const useUserStore = defineStore('users', {
         {
           id: 1,
           email: 'test@test.com',
-          password: 'test123', // En production, il faudrait hasher les mots de passe
+          password: 'test123',
           firstName: 'Test',
           lastName: 'User',
           role: 'parent'
+        },
+        {
+          id: 2,
+          email: 'admin@admin.com',
+          password: 'admin123',
+          firstName: 'Admin',
+          lastName: 'User',
+          role: 'admin'
         }
       ],
       currentUser: null
