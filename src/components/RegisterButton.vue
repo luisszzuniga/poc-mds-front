@@ -109,7 +109,7 @@ const handleUnregister = async () => {
       :disabled="isLoading"
       :class="[
         'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition duration-300',
-        isRegistered ? 'bg-red-600 hover:bg-red-700 focus:ring-red-500' : 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500'
+        isRegistered && userStore.isAuthenticated ? 'bg-red-600 hover:bg-red-700 focus:ring-red-500' : 'bg-blue-600 hover:bg-blue-700 focus:ring-blue-500'
       ]"
     >
       <svg
@@ -126,7 +126,7 @@ const handleUnregister = async () => {
         />
       </svg>
       <span v-if="isLoading">Chargement...</span>
-      <span v-else-if="isRegistered">
+      <span v-else-if="isRegistered && userStore.isAuthenticated">
         Se désinscrire
         <span v-if="childrenCount" class="ml-1 text-xs">({{ childrenCount }} enfant{{ childrenCount > 1 ? 's' : '' }})</span>
       </span>
