@@ -1,19 +1,24 @@
 import { defineStore } from 'pinia'
 
+const STORAGE_KEY = 'mds-users-store'
+
 export const useUserStore = defineStore('users', {
-  state: () => ({
-    users: [
-      {
-        id: 1,
-        email: 'test@test.com',
-        password: 'test123', // En production, il faudrait hasher les mots de passe
-        firstName: 'Test',
-        lastName: 'User',
-        role: 'parent'
-      }
-    ],
-    currentUser: null
-  }),
+  state: () => {
+    const savedState = localStorage.getItem(STORAGE_KEY)
+    return savedState ? JSON.parse(savedState) : {
+      users: [
+        {
+          id: 1,
+          email: 'test@test.com',
+          password: 'test123', // En production, il faudrait hasher les mots de passe
+          firstName: 'Test',
+          lastName: 'User',
+          role: 'parent'
+        }
+      ],
+      currentUser: null
+    }
+  },
 
   getters: {
     isAuthenticated: (state) => !!state.currentUser,
@@ -27,6 +32,7 @@ export const useUserStore = defineStore('users', {
       const user = this.getUserByEmail(email)
       if (user && user.password === password) {
         this.currentUser = user
+        this.saveState()
         return true
       }
       return false
@@ -34,6 +40,7 @@ export const useUserStore = defineStore('users', {
 
     logout() {
       this.currentUser = null
+      this.saveState()
     },
 
     register(userData) {
@@ -48,7 +55,15 @@ export const useUserStore = defineStore('users', {
       }
 
       this.users.push(newUser)
+      this.saveState()
       return true
+    },
+
+    saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        users: this.users,
+        currentUser: this.currentUser
+      }))
     }
   }
 }) 

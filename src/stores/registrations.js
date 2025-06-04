@@ -1,12 +1,17 @@
 import { defineStore } from 'pinia'
 import { useUserStore } from './users'
 
+const STORAGE_KEY = 'mds-registrations-store'
+
 export const useRegistrationStore = defineStore('registrations', {
-  state: () => ({
-    registrations: [],
-    loading: false,
-    error: null
-  }),
+  state: () => {
+    const savedState = localStorage.getItem(STORAGE_KEY)
+    return savedState ? JSON.parse(savedState) : {
+      registrations: [],
+      loading: false,
+      error: null
+    }
+  },
 
   getters: {
     isRegistered: (state) => (activityId) => {
@@ -54,6 +59,7 @@ export const useRegistrationStore = defineStore('registrations', {
         }
 
         this.registrations.push(registration)
+        this.saveState()
         return registration
       } catch (error) {
         this.error = error.message
@@ -90,12 +96,21 @@ export const useRegistrationStore = defineStore('registrations', {
         }
 
         this.registrations.splice(registrationIndex, 1)
+        this.saveState()
       } catch (error) {
         this.error = error.message
         throw error
       } finally {
         this.loading = false
       }
+    },
+
+    saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        registrations: this.registrations,
+        loading: this.loading,
+        error: this.error
+      }))
     }
   }
 }) 
